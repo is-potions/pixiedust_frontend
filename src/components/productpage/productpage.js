@@ -1,4 +1,4 @@
-const ProductPage = () => {
+export const ProductPage = () => {
     return (
         <>
             <div className="productpage">
@@ -8,4 +8,3 @@ const ProductPage = () => {
     );
 }
  
-export default ProductPage;
