@@ -2,12 +2,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Set-up
+Install Node.js LTS (20.10.0) from here: [Node,js LTS](https://nodejs.org/en/).\
+Check if Node and npm is installed: `node -v` for node, `npm -v` for npm.\
+run `npm install` in root directory that includes src folder to install all dependencies. 
+
 ## Available Scripts
 
 In the project directory, you can run:
 
 ### `npm install`
-Installs all dependencies needed for the project to run.\
+Installs all dependencies needed for the project to run.
 
 ### `npm start`
 
@@ -48,9 +53,5 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-## Set-up
-Install Node.js LTS (20.10.0) from here: [Node,js LTS](https://nodejs.org/en/).\
-Check if Node and npm is installed: `node -v` for node, `npm -v` for npm.\
-run `npm install` in root directory that includes src folder to install all dependencies. 
 
 
