@@ -21,11 +21,14 @@ import {
   Modal,
   TextField,
 } from "@mui/material";
+import { useNavigate } from 'react-router-dom';
+
 
 export const ProductCatalog = () => {
   const [products, setProducts] = useState([]);
   const [checkedItems, setCheckedItems] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+  const navigate = useNavigate();
 
   const [orderForm, setOrderForm] = useState({
     orderDate: "",
@@ -40,13 +43,20 @@ export const ProductCatalog = () => {
     const { name, value } = event.target;
     setOrderForm({ ...orderForm, [name]: value });
   };
-  const handleSubmitOrder = () => {
+  const handleSubmitOrder = async () => {
     // Here, you can perform actions with the checked items and orderForm data
-    console.log("Checked Items:", checkedItems);
-    console.log("Order Form Data:", orderForm);
+
+    if (checkedItems.length === 0) return; // guard function to not allow length of 0
+    const postData = {...orderForm, itemIds: checkedItems}
+    console.log("Data:", postData);
 
     // Example: You can send a request with the checked items and orderForm data
-    // axios.post('http://your-api-endpoint', { checkedItems, orderForm });
+    try {
+      const response = await axios.post("http://localhost:8080/orders/1", postData);
+      navigate('/order');
+    } catch (error) {
+      console.error("Error:", error); // Log any errors that occur during the request
+    }
   };
 
   // this will only run once! heheh
@@ -168,8 +178,7 @@ export const ProductCatalog = () => {
                   margin="normal"
                 />
 
-                
-                
+              
                 <Button
                   variant="contained"
                   color="primary"
