@@ -20,7 +20,7 @@ export const ProductCatalog = () => {
   }, []);
 
   return (
-    <div className="home">
+    <div className="productCatalog">
       <h2>Product Catalog</h2>
       <h4>FOLDERS</h4>
       <ProductFolders products={products} />
