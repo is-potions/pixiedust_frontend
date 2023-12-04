@@ -15,12 +15,41 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Checkbox } from "@mui/material";
 import Button from "@mui/material/Button";
+import {
+  // Import necessary Material-UI components
+  // ... (other imports remain the same)
+  Modal,
+  TextField,
+} from "@mui/material";
 
 export const ProductCatalog = () => {
   const [products, setProducts] = useState([]);
   const [checkedItems, setCheckedItems] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
 
-  // this will only run once!
+  const [orderForm, setOrderForm] = useState({
+    orderDate: "",
+    address: "",
+    deliverySchedule: "",
+    recipientName: "",
+    isGift: false,
+    totalPrice: 0,
+  });
+
+  const handleFormChange = (event) => {
+    const { name, value } = event.target;
+    setOrderForm({ ...orderForm, [name]: value });
+  };
+  const handleSubmitOrder = () => {
+    // Here, you can perform actions with the checked items and orderForm data
+    console.log("Checked Items:", checkedItems);
+    console.log("Order Form Data:", orderForm);
+
+    // Example: You can send a request with the checked items and orderForm data
+    // axios.post('http://your-api-endpoint', { checkedItems, orderForm });
+  };
+
+  // this will only run once! heheh
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -67,30 +96,89 @@ export const ProductCatalog = () => {
               justifyContent="space-between"
               mb={2}
             >
-              
               <Box>
-              <Avatar
-                alt="User Avatar"
-                src="https://sm.ign.com/ign_in/screenshot/default/01-03_4e6v.jpg"
-              />
+                <Avatar
+                  alt="User Avatar"
+                  src="https://sm.ign.com/ign_in/screenshot/default/01-03_4e6v.jpg"
+                />
                 <Typography variant="h4" gutterBottom>
                   Welcome! Lee, Deokhyun
                 </Typography>
                 <Typography variant="body1" color="textSecondary">
                   aaa@gmail.com
                 </Typography>
-                
               </Box>
-              
-            
-                    <Box>
-          <Button variant="contained" color="primary" size="large">
-            Submit Order
-          </Button>
-        </Box>
+
+              <Box>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  onClick={() => setOpenModal(true)} // Open modal on button click
+                >
+                  Submit Order
+                </Button>
+              </Box>
             </Box>
           </Box>
           <div className="home">
+            <Modal open={openModal} onClose={() => setOpenModal(false)}>
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  bgcolor: "background.paper",
+                  boxShadow: 24,
+                  p: 4,
+                }}
+              >
+                {/* Form inputs for order details */}
+                <TextField
+                  label="Order Date"
+                  name="orderDate"
+                  value={orderForm.orderDate}
+                  onChange={handleFormChange}
+                  fullWidth
+                  margin="normal"
+                />
+                <TextField
+                  label="Address"
+                  name="address"
+                  value={orderForm.address}
+                  onChange={handleFormChange}
+                  fullWidth
+                  margin="normal"
+                />
+                <TextField
+                  label="Delivery Schedule"
+                  name="deliverySchedule"
+                  value={orderForm.deliverySchedule}
+                  onChange={handleFormChange}
+                  fullWidth
+                  margin="normal"
+                />
+                  <TextField
+                  label="Recipient Name"
+                  name="recipientName"
+                  value={orderForm.recipientName}
+                  onChange={handleFormChange}
+                  fullWidth
+                  margin="normal"
+                />
+
+                
+                
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmitOrder}
+                >
+                  Submit Order
+                </Button>
+              </Box>
+            </Modal>
             <Typography variant="h5" gutterBottom>
               Product Catalog
             </Typography>
@@ -123,7 +211,7 @@ export const ProductCatalog = () => {
                               }
                             />
                             <TableCell>{product.itemName}</TableCell>
-                            <TableCell>{product.features}</TableCell>
+                            <TableCell>{product.features.join(", ")}</TableCell>
                             <TableCell>
                               {product.dimensions.join(", ")}
                             </TableCell>
@@ -167,7 +255,7 @@ export const ProductCatalog = () => {
                               }
                             />
                             <TableCell>{product.itemName}</TableCell>
-                            <TableCell>{product.features}</TableCell>
+                            <TableCell>{product.features.join(", ")}</TableCell>
                             <TableCell>{product.slots}</TableCell>
                             <TableCell>{product.personalization}</TableCell>
                             <TableCell>{product.price}</TableCell>
@@ -209,7 +297,7 @@ export const ProductCatalog = () => {
                               }
                             />
                             <TableCell>{product.itemName},</TableCell>
-                            <TableCell>{product.features},</TableCell>
+                            <TableCell>{product.features.join(", ")},</TableCell>
                             <TableCell>
                               {product.dimensions.join(", ")}
                             </TableCell>
@@ -234,7 +322,6 @@ export const ProductCatalog = () => {
             </Box>
           </div>
         </Box>
-  
       </CardContent>
     </Card>
   );
