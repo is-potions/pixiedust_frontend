@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-export const Home = () => {
+export const ProductCatalog = () => {
   const [products, setProducts] = useState([]);
 
   // this will only run once!

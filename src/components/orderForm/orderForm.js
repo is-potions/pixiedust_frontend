@@ -1,4 +1,4 @@
-export const Cart = () => {
+export const OrderForm = () => {
     return (
         <>
             <div className="cart">

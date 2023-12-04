@@ -1,4 +1,4 @@
-export const ProductPage = () => {
+export const Inventory = () => {
     return (
         <>
             <div className="productpage">
